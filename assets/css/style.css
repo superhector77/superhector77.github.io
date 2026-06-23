@@ -1,0 +1,589 @@
+/* --- Variables & Reset --- */
+:root {
+    --bg-light: #ffffff;
+    --text-main: #333333;
+    --accent: #0055ff;
+    --bg-dark: #1a1a1a;
+    --text-light: #f4f4f4;
+    --card-bg: #f9f9f9;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-light);
+    line-height: 1.6;
+}
+
+/* --- Persistent Navbar --- */
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    border-bottom: 1px solid #eee;
+    padding: 1rem 5%;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo { font-weight: bold; font-size: 1.2rem; text-decoration: none; color: var(--text-main); }
+.nav-links { display: flex; gap: 1rem; list-style: none; }
+.btn { text-decoration: none; color: var(--text-main); padding: 0.5rem 1rem; border-radius: 4px; }
+.btn-primary { background-color: var(--accent); color: white; }
+
+/* --- About Section (Split Layout) --- */
+.split-section {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the content block */
+    gap: 4rem; /* Adds breathing room between text and photo */
+    padding: 4rem 5%;
+    max-width: 1000px; /* Tightened from 1200px to prevent drifting left on wide screens */
+    margin: 0 auto;
+}
+
+.about-text { 
+    flex: 1; /* Allows text to take up remaining space smoothly */
+}
+
+.about-text h1 { 
+    font-size: 2.5rem; 
+    margin-bottom: 1rem; 
+}
+
+.about-image { 
+    flex: 0 0 350px; /* Locks the image container to exactly 350px on desktop */
+    display: flex;
+    justify-content: center;
+}
+
+.about-image img { 
+    width: 100%; 
+    max-width: 350px; /* Prevents the actual image from exceeding 350px */
+    height: auto; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+}
+
+/* --- Action Buttons --- */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Ensure the outline button matches the primary button size */
+.outline-btn {
+    border: 1px solid var(--text-main);
+    color: var(--text-main);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.outline-btn:hover {
+    background-color: var(--text-main);
+    color: var(--bg-light);
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    /* Stack the About section vertically */
+    .split-section { 
+        flex-direction: column-reverse; /* Puts the image on top of the text on mobile */
+        text-align: center; 
+        gap: 2rem;
+    }
+    
+    .about-image {
+        flex: auto; /* Removes the 350px lock on mobile */
+        max-width: 250px; /* Shrinks the image a bit more for phone screens */
+    }
+
+    /* Show 1 card at a time on mobile instead of 3 */
+    .project-card { 
+        flex: 0 0 100%; 
+    }
+}
+
+/* --- Projects Carousel --- */
+#projects { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
+#projects h2 { margin-bottom: 2rem; }
+
+.carousel-container { display: flex; align-items: center; position: relative; gap: 1rem;}
+
+.carousel-track {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: hidden; /* Hides standard scrollbar */
+    scroll-behavior: smooth; /* Makes JS scrolling look nice */
+    width: 100%;
+}
+
+.project-card {
+    flex: 0 0 calc(33.333% - 1rem); /* Forces exactly 3 cards on screen */
+    background-color: var(--card-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #eaeaea;
+}
+
+.card-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;     /* Forces the perfect 4:3 rectangle */
+    object-fit: cover;       /* Fills the box without distorting the image */
+    border-radius: 4px;      /* Softens the corners to match the card */
+    margin-bottom: 1rem;     /* Pushes the title down */
+    display: block;          /* Removes invisible spacing that browsers add below images */
+    background-color: #eee;  /* Acts as a brief loading background before the jpeg pops in */
+}
+/* --- Upgraded Stylish Carousel Buttons --- */
+.carousel-btn {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px); /* Gives a modern frosted glass effect */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--text-main);
+    cursor: pointer;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+    flex-shrink: 0; /* Prevents the buttons from getting squished on small screens */
+}
+
+/* Styles the new SVG arrows perfectly */
+.carousel-btn svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s ease;
+}
+
+/* Hover Effects */
+.carousel-btn:hover {
+    background: #ffffff;
+    color: var(--accent); /* Arrow turns blue on hover */
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    transform: translateY(-2px); /* Button lifts up slightly */
+}
+
+/* Subtle arrow movement on hover */
+.left-btn:hover svg {
+    transform: translateX(-2px);
+}
+
+.right-btn:hover svg {
+    transform: translateX(2px);
+}
+
+/* Click Effect */
+.carousel-btn:active {
+    transform: translateY(0);
+}
+
+/* --- Dark Footer --- */
+.dark-footer {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    padding: 4rem 5%;
+    margin-top: 4rem;
+}
+
+.footer-content { max-width: 1200px; margin: 0 auto; text-align: center; }
+.footer-content p { color: #aaa; }
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    /* Stack the About section vertically */
+    .split-section { flex-direction: column-reverse; text-align: center; }
+    
+    /* Show 1 card at a time on mobile instead of 3 */
+    .project-card { flex: 0 0 100%; }
+}
+
+/* --- Individual Project Pages --- */
+.project-page {
+    padding: 4rem 5%;
+    max-width: 800px; /* Constrains text width for perfect readability */
+    margin: 0 auto;
+}
+
+.project-hero {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.project-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.project-summary {
+    font-size: 1.25rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.hero-image {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Wider cinematic crop for the hero image */
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* --- Responsive Video Embed --- */
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Forces a perfect 16:9 Aspect Ratio */
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    overflow: hidden; /* Clips the sharp corners of the iframe */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.project-content h2 {
+    margin: 2.5rem 0 1rem;
+    font-size: 1.8rem;
+}
+
+/* Add this new rule for your sub-categories */
+.project-content h3 {
+    margin-top: 2.5rem;    /* Adds a large space ABOVE the header */
+    margin-bottom: 1rem;   /* Keeps a small space BELOW the header */
+    font-size: 1.4rem;     /* Makes it slightly smaller than the h2 */
+    color: var(--accent);  /* Optional: gives it your theme color to make it pop */
+}
+
+.project-content p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+/* --- Project Gallery & Navigation --- */
+.project-gallery {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.project-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.outline-btn {
+    border: 1px solid var(--text-main);
+    background: transparent;
+}
+
+/* --- Carousel Links --- */
+.case-study-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.case-study-link:hover {
+    color: #003399; /* A slightly darker blue when hovered */
+    text-decoration: underline;
+}
+
+/* --- Clickable PCB Split Layout --- */
+.pcb-split-section { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #eee; }
+.pcb-split-container {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start; /* Changed from 'center' so the text stays at the top */
+}
+
+.pcb-left {
+    flex: 1.5; /* Reduced from 2 to give the text more room */
+}
+
+.pcb-right {
+    flex: 1; 
+    min-width: 320px; /* Forces the box to stay at a readable width on large monitors */
+}
+
+.pcb-info-panel {
+    background: var(--card-bg);
+    padding: 2.5rem; /* Slightly increased padding for a cleaner look */
+    border-radius: 8px;
+    border: 1px solid #eaeaea;
+    min-height: 200px;
+    
+    /* This keeps the text panel visible as you scroll down a tall image */
+    position: sticky;
+    top: 100px; 
+}
+
+.pcb-hotspot-container {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: #fff;
+    padding: 1rem;
+}
+
+.pcb-main-image { width: 100%; height: auto; display: block; }
+
+/* The clickable button wrapper */
+.hotspot {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    padding: 0;
+}
+
+.hotspot-dot {
+    width: 16px;
+    height: 16px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 0 rgba(0, 85, 255, 0.7);
+    animation: pulse 2s infinite;
+    transition: background-color 0.2s;
+}
+
+/* Highlight the clicked dot */
+.hotspot.active-hotspot .hotspot-dot {
+    background-color: #ff3366; /* Changes color so user knows what they selected */
+    animation: none;
+    box-shadow: 0 0 0 4px rgba(255, 51, 102, 0.3);
+}
+
+.pcb-info-panel {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid #eaeaea;
+    min-height: 200px;
+}
+
+.pcb-info-panel h3 { margin-bottom: 1rem; color: var(--accent); }
+
+/* --- Single Item Carousel --- */
+.single-item-carousel .carousel-track {
+    scroll-snap-type: x mandatory; /* Makes images snap into place */
+    gap: 0; 
+}
+
+.carousel-slide {
+    flex: 0 0 100%; /* Forces each image to take up 100% of the screen */
+    scroll-snap-align: center;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.carousel-slide img {
+    max-width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.carousel-slide figcaption {
+    font-size: 0.95rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .pcb-split-container { flex-direction: column; }
+    .pcb-left, .pcb-right { flex: 1; width: 100%; }
+}
+
+.viewer-screen {
+    height: 300px; /* Locks the height so the buttons don't jump around */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.viewer-screen img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+/* Control Panel */
+.viewer-controls {
+    display: flex;
+    justify-content: center;
+}
+
+.control-group {
+    display: flex;
+    background: #e0e0e0;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.pcb-toggle-btn {
+    background: transparent;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.pcb-toggle-btn.active {
+    background: var(--bg-light);
+    color: var(--text-main);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* --- PCB Header & Toggle Buttons --- */
+.section-header-with-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.view-toggle {
+    display: flex;
+    background: #e0e0e0;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.view-toggle .toggle-btn {
+    background: transparent;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.view-toggle .toggle-btn.active {
+    background: var(--bg-light);
+    color: var(--text-main);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .section-header-with-toggle { flex-direction: column; align-items: flex-start; }
+}
+
+/* --- Project Grid Layout --- */
+.portfolio-section {
+    margin-top: 4rem;
+}
+
+.project-grid {
+    display: grid;
+    /* This automatically creates as many columns as fit, but never lets them get smaller than 300px */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.project-card {
+    background: var(--card-bg, #ffffff);
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    overflow: hidden; /* Keeps the top corners of the image rounded */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect so the card lifts up when a user mouses over it */
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.project-card .card-img {
+    width: 100%;
+    height: 220px; /* Locks all thumbnail images to the exact same height */
+    object-fit: cover; /* Crops the image perfectly without stretching it */
+    border-bottom: 1px solid #eaeaea;
+}
+
+.project-card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Forces this container to take up all remaining vertical space */
+}
+
+.project-card-content h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+}
+
+.project-card-content p {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.case-study-link {
+    margin-top: auto; /* Pushes the link to the absolute bottom of the card */
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.case-study-link:hover {
+    color: #0033aa; /* A slightly darker shade of your accent color for the hover state */
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remora ROV | Hector.</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+    <header class="sticky-nav">
+        <nav>
+            <a href="../index.html" class="logo">Hector</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#about" class="btn">About</a></li>
+                <li><a href="../index.html#projects" class="btn">Work</a></li>
+                <li><a href="../index.html#contact" class="btn btn-primary">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="project-page">
+        <!-- Project Header & Video -->
+        <header class="project-hero">
+            <h1>Remora ROV: Autonomous Inspection</h1>
+            <p class="project-summary">Retrofitting an underwater vehicle for monopile inspections and autonomous navigation.</p>
+            
+            <!-- Slide Deck Button -->
+            <div class="action-buttons" style="justify-content: center; margin-bottom: 2rem;">
+                <a href="../assets/documents/remora-slides.pdf" target="_blank" rel="noopener" class="btn btn-primary">View Slide Deck (PDF)</a>
+            </div>
+
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/gSY8_iJoqN4?si=xhaxoPQYgLU5hOOG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </header>
+
+        <article class="project-content">
+            
+            <h2>Vehicle Dynamics & Power Logistics</h2>
+            <p>The system utilizes the BlueROV2 Heavy configuration, featuring an 8-thruster layout that provides full 6-Degree-of-Freedom (6-DoF) control. This setup is critical for executing complex inspection maneuvers, such as orbiting a monopile while keeping the camera locked on the target.</p>
+            <p>The ROV chassis was custom-machined from 6061 Aluminum. We initially pursued a custom frame geometry to optimize hydrodynamic performance; however, our subsequent simulations revealed no significant drag reduction compared to standard commercial frames. Additionally, the dense aluminum chassis, coupled with the heavy 360-degree scanning sonar and custom payload enclosures, drastically altered the vehicle's displacement. To achieve neutral buoyancy, we had to integrate significantly more syntactic foam than originally budgeted, carefully distributing it to maintain perfect pitch and roll trim.</p>
+            <p>For communication, data is transmitted over a single twisted pair inside a 300m neutrally buoyant tether using a Fathom-X interface. While the tether supports 400V, sending power down a 300m line requires bulky step-down converters. To optimize power economy and bay space, we opted for local battery power over tethered power.</p>
+
+            <div class="carousel-container single-item-carousel">
+                <button class="carousel-btn left-btn" aria-label="Previous image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <div class="carousel-track">
+
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/remora/hardware-1.jpg" alt="Thruster layout">
+                        <figcaption>The 8-thruster Heavy configuration allows for full 6-DoF flight.</figcaption>
+                    </figure>
+
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/remora/hardware-2.jpg" alt="Foam trimming">
+                        <figcaption>Selected battery, with XT90 connector and balancing leads.</figcaption>
+                    </figure>
+
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/remora/hardware-3.png" alt="Foam trimming">
+                        <figcaption>Cross-section of selected tether. One twisted pair was sufficient to send video footage, sonar data, and receive commands. </figcaption>
+                    </figure>
+
+                </div>
+                <button class="carousel-btn right-btn" aria-label="Next image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+
+            <h2>Waterproofing & Deep-Sea Sealing</h2>
+            <p>Achieving a 300-meter depth rating requires strict surface preparation. All aluminum flange mating surfaces were chemically stripped with acetone. Radial O-rings were lubricated with a highly specific, minimal film of marine silicone to avoid trapping micro-bubbles that cause high-pressure extrusion leaks.</p>
+            <p>Tether wires entering the dry bay were permanently potted into aluminum penetrators using marine-grade structural epoxy. Due to timeline constraints, we omitted a dedicated Kellems grip (strain relief bail). Consequently, the tether and epoxy potting bore the entire structural hanging weight of the ROV during deployment—a recognized poor engineering practice that survived testing only due to the extreme shear strength of the epoxy.</p>
+            <p>To verify seals prior to wet testing, the dry bay was pulled to a negative pressure using a topside vacuum pump for 10 minutes. While successful, this dry test only confirms seal integrity for roughly 1 atmosphere (5 meters), highlighting a critical gap between lab testing and 300-meter verification.</p>
+
+            <div class="carousel-container single-item-carousel">
+                <button class="carousel-btn left-btn" aria-label="Previous image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <div class="carousel-track">
+
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/remora/seal-1.jpg" alt="O-ring lubrication">
+                        <figcaption>Electronics enclosure Pressure Relief Valve (PRV), removable for vacuum testing.</figcaption>
+                    </figure>
+
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/remora/seal-2.jpg" alt="Vacuum testing">
+                        <figcaption>Supplies used to seal tether penetrator.</figcaption>
+                    </figure>
+
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/remora/seal-3.jpg" alt="Vacuum testing">
+                        <figcaption>Potted penetrator with axial O-ring.</figcaption>
+                    </figure>
+
+                </div>
+                <button class="carousel-btn right-btn" aria-label="Next image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+
+            <h2>Autonomy & Simulation Stack</h2>
+            <p>Because subsea hardware testing is high-risk, the entire flight stack was verified using Software-In-The-Loop (SITL) simulation before touching the water. We used Gazebo to simulate fluid dynamics and virtual sonar returns, and ArduSub to run the flight controller PID loops.</p>
+            <p>I wrote custom Python scripts utilizing PyMAVLink to act as the "Captain." <strong>The Commander</strong> script automatically arms the sub into GUIDED mode and runs a precise orbital inspection trajectory at 10Hz (strafing right at 1 m/s while rotating at 0.5 rad/s). <strong>The Scout</strong> script acts as a telemetry sniffer, eavesdropping on the MAVLink stream to verify our virtual 2D scanning sonar was successfully passing <code>OBSTACLE_DISTANCE</code> messages to the brain.</p>
+
+            <div class="carousel-container single-item-carousel">
+                <button class="carousel-btn left-btn" aria-label="Previous image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <div class="carousel-track">
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/remora/sim-1.png" alt="Gazebo Simulation">
+                        <figcaption>Top view of virtual ROV in QGroundControl software.</figcaption>
+                    </figure>
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/remora/sim-2.gif" alt="Open Water Test">
+                        <figcaption>Virtual ROV following fixed circular orbit. In the future, the ROV would use its sonar sensors to orbit an offshore wind monopile at a safe distance. </figcaption>
+                    </figure>
+                </div>
+                <button class="carousel-btn right-btn" aria-label="Next image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+
+            <!-- SECTION 4: Field Deployment -->
+            <h2>Field Deployment & System Integration</h2>
+            <p>Transitioning from the lab to open water required robust physical deployment infrastructure. We managed the 300-meter tether using a large custom spool integrated with a slip-ring. This was a critical mechanical feature, allowing for uninterrupted high-voltage power and Fathom-X data transmission while the spool rotated during payout and retrieval.</p>
+            <p>During launch and recovery operations, the ROV was suspended entirely by the tether and lowered into the water using a heavy-duty A-frame hoist. While the ROV's internal subsea systems functioned as designed, testing the full shore-to-ship-to-sub architecture hit a logistical roadblock. Due to critical supplier delays with our autonomous surface vessel provider, we were unable to integrate the boat's propulsion and onboard computing suite. </p>
+            <p>Instead of halting the test, we adapted our operational protocols, bypassing the boat entirely and running the topside communications and power relay directly from the deployment pier.</p>
+
+            <!-- Carousel 4 (Deployment) -->
+            <div class="carousel-container single-item-carousel">
+                <button class="carousel-btn left-btn" aria-label="Previous image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <div class="carousel-track">
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/remora/deploy-1.jpg" alt="Custom tether spool with slip ring">
+                        <figcaption>The 300m tether managed on a custom spool equipped with a continuous-transmission slip-ring. Remora ROV in the water.</figcaption>
+                    </figure>
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/remora/deploy-2.jpg" alt="A-frame deployment">
+                        <figcaption>Complete Remora team.</figcaption>
+                    </figure>
+                </div>
+                <button class="carousel-btn right-btn" aria-label="Next image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+
+            <h2>Lessons Learned & V2 Roadmap</h2>
+            <ul>
+                <li><strong>Mechanical Strain Relief:</strong> V2 must incorporate a dedicated mechanical Kellems grip tied directly to the structural aluminum frame to isolate the data lines from tension loads.</li>
+                <li><strong>Closed-Loop Wall Braking:</strong> The next software milestone is feeding the sonar distance directly into the velocity controller, allowing the sub to automatically override pilot input and brake when approaching within 1.5 meters of a wall.</li>
+                <li><strong>High-Pressure Validation:</strong> Future iterations require testing empty enclosures in a physical hydrostatic pressure chamber at 35+ atmospheres before installing internal avionics.</li>
+            </ul>
+
+        </article>
+
+        <nav class="project-nav">
+            <a href="../index.html#projects" class="btn outline-btn">&larr; Back to all work</a>
+        </nav>
+    </main>
+
+    <footer id="contact" class="dark-footer">
+        <div class="footer-content">
+            <h2>Reach out!</h2>
+            <p>Email: hectormlugaro [at] gmail [dot] com</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

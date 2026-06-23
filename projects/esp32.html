@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom PCBs & Hardware Integration | Hector.</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+    <header class="sticky-nav">
+        <nav>
+            <a href="../index.html" class="logo">Hector</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#about" class="btn">About</a></li>
+                <li><a href="../index.html#projects" class="btn">Work</a></li>
+                <li><a href="../index.html#contact" class="btn btn-primary">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="project-page">
+        <header class="project-hero">
+            <h1>Custom PCBs & Hardware Integration</h1>
+            <p class="project-summary">Custom circuit board design and firmware development for MIT's Electronics for Mechanical Systems II.</p>
+            
+            <div class="action-buttons" style="justify-content: center; margin-bottom: 2rem;">
+                <a href="../assets/documents/esp32-slides.pdf" target="_blank" rel="noopener" class="btn btn-primary">View Slide Deck (PDF)</a>
+            </div>
+
+            <img src="../assets/images/projects/esp32/thumbnail.jpg" alt="Custom ESP32-S3 PCB" class="hero-image">
+        </header>
+
+        <article class="project-content">
+            
+            <h2>Project 1: The Screaming Gingerbread Man</h2>
+            <p>My first project for the course was a Gingerbread Man PCB designed to "scream" if one of its limbs was broken off. The system utilized an Arduino Nano to detect voltage drops across resistors placed in parallel with breakaway wire traces on the board's limbs.</p>
+            <p>A DF Player Mini handles audio playback from a microSD card. When the initial PCB revision failed to trigger sound, I isolated the hardware logic by recreating the circuit on a breadboard. This systematic debugging revealed a few minor trace issues, as well as a critical UART schematic error: I had routed the Nano's RX and TX pins directly to the DF Player's RX and TX, rather than correctly crossing them over.</p>
+
+            <h2>Project 2: Wireless Guitar Hero Controller</h2>
+            <p>For my final project, I engineered a custom, wireless Guitar Hero controller from scratch. The system is built around the ESP32-S3 C1 devkit. This specific microcontroller was selected because of its native USB Human Interface Device (HID) capabilities, dedicated D+ and D- pins for USB data, and onboard Bluetooth for untethered gameplay.</p>
+            <p>To make the controller fully wireless, I designed a power management system utilizing a 3.7V 18650 battery with built-in charge protection, leveraging the main board's charging circuit. The controller switches seamlessly between USB and battery power, using a Low-Dropout (LDO) regulator to supply 5V, with dedicated LEDs indicating the charging state.</p>
+            
+            <h2>Navigating Hardware Constraints</h2>
+            <p>Developing custom hardware requires navigating unexpected constraints and layout errors. On the first PCB revision, the board failed to boot because I had inadvertently tied an active-high enable pin directly to ground. Bending the pin and connecting to high was not enough to fix the error.</p>
+            <p>Additionally, during firmware development, I had to remap my fret inputs after identifying internal constraints on pins like Pin 37. I ultimately routed the fret buttons to pins 45, 48, 47, 21, and 14, which provided reliable, uninterrupted HID communication for gameplay. By implementing hardware workarounds for these layout bugs, I was able to successfully demonstrate a fully functional, playable guitar controller for the final presentation.</p>
+
+        </article>
+
+        <section class="pcb-split-section">
+            <div class="section-header-with-toggle">
+                <div class="header-text">
+                    <h2>Hardware Architecture: ESP32 Controller</h2>
+                    <p>Tap the markers to explore the core subsystems.</p>
+                </div>
+                
+                <div class="view-toggle">
+                    <button class="toggle-btn active" data-target="guitar-front-view" data-group="guitar">Front</button>
+                    <button class="toggle-btn" data-target="guitar-back-view" data-group="guitar">Back</button>
+                </div>
+            </div>
+            
+            <div id="guitar-front-view" class="pcb-split-container guitar-view">
+                <div class="pcb-left">
+                    <div class="pcb-hotspot-container">
+                        <img src="../assets/images/projects/esp32/guitar-front.png" alt="ESP32 Guitar PCB Front" class="pcb-main-image">
+                        
+                        <button class="hotspot active-hotspot" style="top: 47%; left: 67%;" data-title="ESP32-S3 C1" data-desc="Selected for its native USB HID support. Fret and button inputs are routed to digital pins on the right hemisphere of the board. D+ and D- USB data traces were kept as short as possible to minimize signal degradation and noise. Power is delivered at 3.3V, utilizing bypass capacitors to smooth current fluctuations."><span class="hotspot-dot"></span></button>
+                        <button class="hotspot" style="top: 80%; left: 67%;" data-title="Charging Circuit" data-desc="A TP4056 IC manages safe battery charging when tethered via USB, seamlessly switching to battery power when unplugged. A 3.3V Low-Dropout (LDO) regulator ensures a stable voltage supply to the microcontroller regardless of the battery's current charge state."><span class="hotspot-dot"></span></button>
+                        <button class="hotspot" style="top: 45%; left: 31%;" data-title="18650 Battery" data-desc="To maximize untethered operational uptime, the system is powered by a high-capacity 3.7V 18650 lithium-ion cell. The current cell features integrated over-discharge protection; however, the V2 roadmap includes integrating this protection directly into the board's charging circuit."><span class="hotspot-dot"></span></button>
+                    </div>
+                </div>
+                <div class="pcb-right">
+                    <div class="pcb-info-panel">
+                        <h3 class="info-title">ESP32-S3 C1</h3>
+                        <p class="info-desc">Selected for its native USB HID support. Fret and button inputs are routed to digital pins on the right hemisphere of the board. D+ and D- USB data traces were kept as short as possible to minimize signal degradation and noise. Power is delivered at 3.3V, utilizing bypass capacitors to smooth current fluctuations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="guitar-back-view" class="pcb-split-container guitar-view" style="display: none;">
+                <div class="pcb-left">
+                    <div class="pcb-hotspot-container">
+                        <img src="../assets/images/projects/esp32/guitar-back.png" alt="ESP32 Guitar PCB Back" class="pcb-main-image">
+                        
+                        <button class="hotspot active-hotspot" style="top: 50%; left: 50%;" data-title="Ground Plane" data-desc="The back of the PCB acts as a continuous ground plane to simplify routing and improve signal integrity. Strict copper keep-out zones were implemented around the mounting holes to prevent metal fasteners from shorting the circuit. Thickened power traces ensure safe current delivery to the LDO."><span class="hotspot-dot"></span></button>
+                    </div>
+                </div>
+                <div class="pcb-right">
+                    <div class="pcb-info-panel">
+                        <h3 class="info-title">Ground Plane</h3>
+                        <p class="info-desc">The back of the PCB acts as a continuous ground plane to simplify routing and improve signal integrity. Strict copper keep-out zones were implemented around the mounting holes to prevent metal fasteners from shorting the circuit. Thickened power traces ensure safe current delivery to the LDO.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pcb-split-section">
+            <div class="section-header-with-toggle">
+                <div class="header-text">
+                    <h2>Hardware Architecture: Screaming Gingerbread Man</h2>
+                    <p>Tap the markers to explore the core subsystems.</p>
+                </div>
+                
+                <div class="view-toggle">
+                    <button class="toggle-btn active" data-target="ginger-front-view" data-group="ginger">Front</button>
+                    <button class="toggle-btn" data-target="ginger-back-view" data-group="ginger">Back</button>
+                </div>
+            </div>
+            
+            <div id="ginger-front-view" class="pcb-split-container ginger-view">
+                <div class="pcb-left">
+                    <div class="pcb-hotspot-container">
+                        <img src="../assets/images/projects/esp32/gingerbread-front.png" alt="Gingerbread PCB Front" class="pcb-main-image">
+                        
+                        <button class="hotspot active-hotspot" style="top: 20%; left: 43%;" data-title="Arduino Nano" data-desc="Detects voltage drops and sends signal to DF Player."><span class="hotspot-dot"></span></button>
+                        <button class="hotspot" style="top: 20%; left: 60%;" data-title="DF Player Mini" data-desc="This module receives serial UART commands from the Arduino Nano to trigger specific audio tracks stored on a microSD card. When the hardware logic detects a broken limb, the Nano signals the module to immediately play a screaming sound."><span class="hotspot-dot"></span></button>
+                        <button class="hotspot" style="top: 55%; left: 36%;" data-title="Resistor Network" data-desc="A network of resistors is placed in parallel with sacrificial copper traces routed directly through the board's perforated limbs. When intact, the trace bypasses the resistor, resulting in no voltage drop. Once a limb is snapped off, the circuit is forced through the resistor, creating a specific, measurable voltage drop that the Nano reads to trigger the audio."><span class="hotspot-dot"></span></button>
+                    </div>
+                </div>
+                <div class="pcb-right">
+                    <div class="pcb-info-panel">
+                        <h3 class="info-title">Arduino Nano Brain</h3>
+                        <p class="info-desc">Detects voltage drops across resistors placed in parallel with breakaway wire traces on the board's limbs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ginger-back-view" class="pcb-split-container ginger-view" style="display: none;">
+                <div class="pcb-left">
+                    <div class="pcb-hotspot-container">
+                        <img src="../assets/images/projects/esp32/gingerbread-back.png" alt="Gingerbread PCB Back" class="pcb-main-image">
+                        
+                        <button class="hotspot active-hotspot" style="top: 40%; left: 30%;" data-title="Breakaway Limbs" data-desc="Sacrificial traces are routed directly across the perforation lines to trigger the voltage drop logic."><span class="hotspot-dot"></span></button>
+                        <button class="hotspot" style="top: 50%; left: 50%;" data-title="Battery" data-desc="Driving the speaker requires a high instantaneous current draw. While coin cell batteries would be ideal for a small, disposable novelty board, they lack the discharge capacity required for audio playback. Therefore, I opted for a 3.7V 450mAh LiPo battery to ensure reliable performance."><span class="hotspot-dot"></span></button>
+                    </div>
+                </div>
+                <div class="pcb-right">
+                    <div class="pcb-info-panel">
+                        <h3 class="info-title">Breakaway Limbs</h3>
+                        <p class="info-desc">Sacrificial traces are routed directly across the perforation lines to trigger the voltage drop logic.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-gallery">
+            <h2>Gallery</h2>
+            <div class="carousel-container single-item-carousel">
+                <button class="carousel-btn left-btn" aria-label="Previous image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                
+                <div class="carousel-track" id="project-track">
+                    <figure class="carousel-slide"><img src="../assets/images/projects/esp32/carousel-1.jpg" alt="Detail 1"><figcaption>Simplified gingerbread man circuit test.</figcaption></figure>
+                    <figure class="carousel-slide"><img src="../assets/images/projects/esp32/carousel-2.jpg" alt="Detail 2"><figcaption>Gingerbread man PCB with final changes. Test rip was not successful.</figcaption></figure>
+                    <figure class="carousel-slide"><img src="../assets/images/projects/esp32/carousel-3.jpg" alt="Detail 3"><figcaption>Replacement fret board made with laser-cut acrylic.</figcaption></figure>
+                    <figure class="carousel-slide"><img src="../assets/images/projects/esp32/carousel-4.jpg" alt="Detail 4"><figcaption>Guitar PCB test.</figcaption></figure>
+                    <figure class="carousel-slide"><img src="../assets/images/projects/esp32/carousel-5.jpg" alt="Detail 5"><figcaption>Guitar assembly prototype.</figcaption></figure>
+                    <figure class="carousel-slide"><img src="../assets/images/projects/esp32/carousel-6.jpg" alt="Detail 6"><figcaption>Final guitar and prototype comparison.</figcaption></figure>
+                </div>
+
+                <button class="carousel-btn right-btn" aria-label="Next image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <article class="project-content" style="margin-top: 4rem; border-top: 1px solid #eee; padding-top: 2rem;">
+            <h2>V2 Roadmap</h2>
+            <p>While the initial board required hardware workarounds to become playable, diagnosing these layout bugs provided a clear roadmap for the next iteration. For V2, I plan to implement the following changes:</p>
+            <h3>Guitar</h3>
+            <ul>
+                <li>Correct grounded active-high enable pin.</li>
+                <li>Optimize the fret input trace routing, permanently avoiding internally constrained GPIOs like Pin 37.</li>
+                <li>Connect type-C 5V pin to ESP32 to switch from wired to wireless mode.</li>
+                <li>Add protection circuit to main PCB.</li>
+                <li>Use correct Low-profile switch footprint.</li>
+                <li>Integrate the ESP32 directly into guitar PCB.</li>
+            </ul>
+            
+            <h3>Gingerbread</h3>
+            <ul>
+                <li>Connect RX to TX wires and vice-versa.</li>
+                <li>Add 100 Ohm resistor between DF RX and Nano TX for signal integrity.</li>
+                <li>Use correct Molex connector for battery.</li>
+                <li>Replace Nano for ATmega microcontroller. </li>
+            </ul>
+        </article>
+
+        <nav class="project-nav">
+            <a href="../index.html#projects" class="btn outline-btn">&larr; Back to all work</a>
+        </nav>
+
+    </main>
+
+    <footer id="contact" class="dark-footer">
+        <div class="footer-content">
+            <h2>Reach out!</h2>
+            <p>Email: hectormlugaro [at] gmail [dot] com</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

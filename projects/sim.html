@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adversarial Ping Pong | Hector.</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+    <header class="sticky-nav">
+        <nav>
+            <a href="../index.html" class="logo">Hector.</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#about" class="btn">About</a></li>
+                <li><a href="../index.html#projects" class="btn">Work</a></li>
+                <li><a href="../index.html#contact" class="btn btn-primary">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="project-page">
+        <header class="project-hero">
+            <h1>Adversarial Ping Pong</h1>
+            <p class="project-summary">Simulating a 7-DOF Kuka iiwa robot arm in PyDrake to track, intercept, and strike a ping pong ball toward a dynamically specified target in real-time.</p>
+            
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/PJK6_HPwc4c" title="Robotic Ping Pong Simulation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </header>
+
+        <article class="project-content">
+            
+            <h2>Overview: Robotic Manipulation</h2>
+            <p>Developed for MIT's Robotic Manipulation course (6.4212), this project demonstrates a complete, real-time autonomy stack—from perception and trajectory prediction to motion planning and control.</p>
+
+            <h2>Perception and Trajectory Prediction</h2>
+            <p>The system relies on a simulated LiDAR setup to perceive the environment. By processing a 30Hz feed of down-sampled point clouds, the pipeline calculates the ball's centroid in real-time. We implemented a least-squares model to extrapolate this data, predicting the ball's incoming trajectory with enough accuracy to prepare an intercept path.</p>
+
+            <h2>Kinematics and Control</h2>
+            <p>Once the trajectory is established, the robot calculates the required paddle normal and swing speed to redirect the ball toward a specific, user-defined target. To physically achieve this desired swing, the system computes the necessary joint velocities for the 7-DOF arm using the Jacobian pseudo-inverse.</p>
+
+            <h2>Optimizing the Motion Planner</h2>
+            <p>Designing a fast, reliable motion planner was our most significant technical hurdle. While Graphs of Convex Sets (GCS) is a standard recommendation for motion planning in Drake, we opted to implement Cubic Hermite Splines instead.</p>
+            <p>Because our workspace was relatively simple—with the table acting as the only major obstacle—the GCS method introduced unnecessary computational overhead without yielding significant benefits. By pivoting to Cubic Hermite Splines, we dramatically reduced calculation time, ensuring our control loops maintained strict real-time performance.</p>
+
+        </article>
+
+        <nav class="project-nav">
+            <a href="../index.html#projects" class="btn outline-btn">&larr; Back to all work</a>
+        </nav>
+
+    </main>
+
+    <footer id="contact" class="dark-footer">
+        <div class="footer-content">
+            <h2>Get in touch</h2>
+            <p>I'm always open to discussing hardware, robotics, or a good 10k run.</p>
+            <p>Email: hector [at] mit [dot] edu</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye of Agamotto Yo-yo | Hector.</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+    <header class="sticky-nav">
+        <nav>
+            <a href="../index.html" class="logo">Hector.</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#about" class="btn">About</a></li>
+                <li><a href="../index.html#projects" class="btn">Work</a></li>
+                <li><a href="../index.html#contact" class="btn btn-primary">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="project-page">
+        <header class="project-hero">
+            <h1>Injection Molded Yo-yo</h1>
+            <p class="project-summary">End-to-end CAD, mold design, and mass manufacturing of 50 custom injection-molded yo-yo's for MIT's Design and Manufacturing II (2.008).</p>
+            
+            <!-- Slide Deck Button -->
+            <div class="action-buttons" style="justify-content: center; margin-bottom: 2rem;">
+                <a href="../assets/documents/yoyo-slides.pdf" target="_blank" rel="noopener" class="btn btn-primary">View Poster (PDF)</a>
+            </div>
+
+            <img src="../assets/images/projects/yoyo/thumbnail.png" alt="Eye of Agamotto Yo-yo" class="hero-image">
+        </header>
+
+        <article class="project-content">
+            
+            <h2>Design & Hybrid Tooling</h2>
+            <p>The yo-yo was designed as a faithful recreation of the "Eye of Agamotto" amulet. To achieve this complex, multi-layered look, the assembly was broken down into four distinct components: an injection-molded main body, injection-molded top and bottom caps, and a thermoformed green "Time Stone" gem.</p>
+            <p>For the injection molding tooling, we CAMed and machined three custom aluminum molds using a <strong>HAAS CNC Mill</strong>. Translating the intricate, branch-like engravings of the amulet into a machinable mold presented a strict Design for Manufacturing (DFM) constraint: our smallest end mill was 1/16". We had to iteratively widen the channels and reduce cut depths in CAD to ensure the end mill could actually clear the toolpaths without breaking.</p>
+            <p>Conversely, the "Time Stone" required an entirely different tooling approach. To capture its smooth, dome-like geometry without the surface finish artifacts of CNC milling, we utilized <strong>SLA Resin 3D Printing</strong> to produce a high-resolution buck. We then used a vacuum thermoformer to pull sheets of green plastic over the SLA mold, yielding 50 perfectly smooth gems.</p>
+            
+            <h2>Process Control: The Physics of Injection Molding</h2>
+            <p>Manufacturing 200 total plastic parts required operating an <strong>Arburg Injection Molding Machine</strong> and deeply understanding how thermodynamic and fluid variables directly impact part quality. By iteratively tuning these parameters, and spraying the mold with a release agent to compensate for the "grippy" overhanging branches of our design, we achieved a zero-defect yield for our final assembly run. </p>
+            <p>Finding the "sweet spot" meant balancing four primary parameters:</p>
+            <ul>
+                <li><strong>Dosage (Shot Size):</strong> The actual volume of molten plastic injected. If the dosage is too low, the mold doesn't fill entirely, resulting in a defect known as a <em>short shot</em> or underfill.</li>
+                <li><strong>Injection Velocity:</strong> The speed at which the plastic is rammed into the mold. Pushing the plastic too fast traps pockets of air inside the cavity. The extreme pressure superheats the trapped air, causing miniature explosions that leave <em>burn marks</em> (dieseling) on the plastic.</li>
+                <li><strong>Holding Pressure:</strong> Once filled, pressure must be maintained as the part shrinks to pack more material into the cavity, ensuring dimensional accuracy.</li>
+                <li><strong>Cooling Time:</strong> The part must solidify before ejection. If the cooling time is rushed to speed up production, the plastic remains soft. When the machine automatically punches the part out, the ejector pins will physically pierce or warp the soft plastic, causing <em>pin push deformation</em>.</li>
+            </ul>
+            
+            <h2>Metrology & Tolerance Buildup</h2>
+            <p>The yo-yo halves had to snap together and stay intact during use, requiring a precise press-fit. Our nominal CAD targeted a 0.015" diametrical interference. However, in mass manufacturing, nominal dimensions rarely survive reality.</p>
+            <p>First, polymers shrink as they cool. Using MoldFlow simulations, we determined our parts would shrink by approximately 2.3% to 2.7%. We proactively scaled our mold CAD up to compensate. </p>
+            <p>Second, machining wear, machine vibration, and slight temperature fluctuations during molding mean no two parts are identical—they exist on a statistical distribution. By using a Coordinate Measuring Machine (CMM) and analyzing the physical batches, we calculated our true tolerance buildup. Because both mating parts experienced similar shrinkage rates, our distributions aligned beautifully: the final assembled yo-yos yielded an average diametrical interference of 0.020" with a standard deviation of just 0.003", guaranteeing a secure press-fit across all 50 units.</p>
+        </article>
+
+        <section class="project-gallery">
+            <h2>Gallery</h2>
+            <div class="carousel-container single-item-carousel">
+                <button class="carousel-btn left-btn" aria-label="Previous image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                
+                <div class="carousel-track" id="project-track">
+
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/yoyo/carousel-1.png" alt="Detail 2">
+                        <figcaption>Yo-yo CAD. </figcaption>
+                    </figure>
+
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/yoyo/carousel-2.png" alt="Detail 3">
+                        <figcaption>Yo-yo cross-section view. The walls are 0.85", the nominal interference fit is 0.015", and the yo-yo is 1.17" thick.</figcaption>
+                    </figure>
+
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/yoyo/carousel-3.png" alt="Detail 4">
+                        <figcaption>Shrinkage analysis of the yo-yo. We assumed 2.3%, 2.4% and 2.7% total shrinkage for each of our 3 parts.</figcaption>
+                    </figure>
+                    
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/yoyo/carousel-4.png" alt="Detail 4">
+                        <figcaption>CAD of a machined mold. Note that the smallest tool available was a 1/16" end mill.</figcaption>
+                    </figure>
+
+                    <figure class="carousel-slide">
+                        <img src="../assets/images/projects/yoyo/carousel-5.png" alt="Detail 4">
+                        <figcaption>Final yo-yo.</figcaption>
+                    </figure>
+
+                </div>
+
+                <button class="carousel-btn right-btn" aria-label="Next image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <nav class="project-nav">
+            <a href="../index.html#projects" class="btn outline-btn">&larr; Back to all work</a>
+        </nav>
+
+    </main>
+
+    <footer id="contact" class="dark-footer">
+        <div class="footer-content">
+            <h2>Get in touch</h2>
+            <p>I'm always open to discussing hardware, robotics, or a good 10k run.</p>
+            <p>Email: hector [at] mit [dot] edu</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
